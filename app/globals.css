@@ -7,7 +7,6 @@ html {
 
 @custom-variant dark (&:is(.dark *));
 
-
 /* Complete warm light palette using exact user colors: #f5eee2, #d4b999, white */
 :root {
   --background: #f5eee2;
@@ -87,48 +86,94 @@ html {
   --sidebar-ring: #d4b999;
 }
 
-.test {
-  --background: #f5eee2;
-  --foreground: #3d3426;
+.notion {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
   --card: #ffffff;
-  --card-foreground: #3d3426;
+  --card-foreground: #1a1a1a;
   --popover: #ffffff;
-  --popover-foreground: #3d3426;
-  --primary: #c9a66b;
-  --primary-foreground: #2a2418;
-  --secondary: #ebe4d6;
-  --secondary-foreground: #5c5040;
-  --muted: #e8dfd0;
-  --muted-foreground: #8a7d6b;
-  --accent: #d4b999;
-  --accent-foreground: #3d3426;
-  --destructive: #c45d4a;
+  --popover-foreground: #1a1a1a;
+  --primary: #2c2c2c;
+  --primary-foreground: #f8f8f8;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #2c2c2c;
+  --muted: #f9f9f9;
+  --muted-foreground: #666666;
+  --accent: #3a3a3a;
+  --accent-foreground: #f8f8f8;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #d4c9b8;
-  --input: #ebe4d6;
-  --ring: #c9a66b;
-  --chart-1: #c9a66b;
-  --chart-2: #a67c52;
-  --chart-3: #8fa68a;
-  --chart-4: #7a9ba8;
-  --chart-5: #b88b8b;
-  --radius: 0.75rem;
-  --sidebar: #f0e8db;
-  --sidebar-foreground: #3d3426;
-  --sidebar-primary: #c9a66b;
-  --sidebar-primary-foreground: #2a2418;
-  --sidebar-accent: #e8dfd0;
-  --sidebar-accent-foreground: #5c5040;
-  --sidebar-border: #d4c9b8;
-  --sidebar-ring: #c9a66b;
+  --border: #e8e8e8;
+  --input: #ffffff;
+  --ring: #404040;
+  --chart-1: #404040;
+  --chart-2: #666666;
+  --chart-3: #8c8c8c;
+  --chart-4: #b3b3b3;
+  --chart-5: #d9d9d9;
+  --radius: 0.5rem;
+  --sidebar: #fafafa;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #3a3a3a;
+  --sidebar-primary-foreground: #f8f8f8;
+  --sidebar-accent: #f0f0f0;
+  --sidebar-accent-foreground: #2c2c2c;
+  --sidebar-border: #e8e8e8;
+  --sidebar-ring: #404040;
 
-  /* Custom warm colors for easy access */
-  --warm-cream: #f5eee2;
-  --warm-beige: #d4b999;
-  --warm-tan: #c9a66b;
-  --warm-brown: #a67c52;
-  --warm-dark: #3d3426;
+  /* Stone color palette */
+  --stone-50: #fafafa;
+  --stone-100: #f5f5f5;
+  --stone-200: #e8e8e8;
+  --stone-300: #d4d4d4;
+  --stone-400: #a3a3a3;
+  --stone-500: #737373;
+  --stone-600: #525252;
+  --stone-700: #404040;
+  --stone-800: #2c2c2c;
+  --stone-900: #1a1a1a;
+  --midnight: #0f172a;
+  --slate: #1e293b;
+  --graphite: #1a1a1a;
+  --ink: #111827;
 }
+
+.notion_dark {
+  --background: #0a0a0a;
+  --foreground: #f0f0f0;
+  --card: #111111;
+  --card-foreground: #f0f0f0;
+  --popover: #111111;
+  --popover-foreground: #f0f0f0;
+  --primary: #e5e5e5;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #e5e5e5;
+  --muted: #141414;
+  --muted-foreground: #a3a3a3;
+  --accent: #e5e5e5;
+  --accent-foreground: #0a0a0a;
+  --destructive: #dc2626;
+  --destructive-foreground: #f0f0f0;
+  --border: #262626;
+  --input: #111111;
+  --ring: #d4d4d4;
+  --chart-1: #e5e5e5;
+  --chart-2: #a3a3a3;
+  --chart-3: #737373;
+  --chart-4: #525252;
+  --chart-5: #404040;
+  --sidebar: #111111;
+  --sidebar-foreground: #f0f0f0;
+  --sidebar-primary: #e5e5e5;
+  --sidebar-primary-foreground: #0a0a0a;
+  --sidebar-accent: #1a1a1a;
+  --sidebar-accent-foreground: #e5e5e5;
+  --sidebar-border: #262626;
+  --sidebar-ring: #d4d4d4;
+}
+
+
 
 @theme inline {
   --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
@@ -356,7 +401,12 @@ html {
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(212, 185, 153, 0.3), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 185, 153, 0.3),
+    transparent
+  );
   background-size: 200% 100%;
   animation: shimmer 2s ease-in-out infinite;
 }
@@ -405,6 +455,14 @@ html {
 
 /* Soft paper texture */
 .paper-texture {
-  background-image: radial-gradient(ellipse at 20% 30%, rgba(212, 185, 153, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(201, 166, 107, 0.1) 0%, transparent 50%);
+  background-image: radial-gradient(
+      ellipse at 20% 30%,
+      rgba(212, 185, 153, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 70%,
+      rgba(201, 166, 107, 0.1) 0%,
+      transparent 50%
+    );
 }

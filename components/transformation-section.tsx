@@ -47,7 +47,7 @@ export function TransformationSection() {
             >
               <div className="relative rounded-2xl overflow-hidden min-h-[300px]">
                 <img
-                  src="/reprecent/messy.png"
+                  src="/sandboard/fog.png"
                   alt="Messy"
                   className="w-full h-full object-cover"
                 />
@@ -68,7 +68,7 @@ export function TransformationSection() {
             >
               <div className="relative rounded-2xl overflow-hidden min-h-[300px]">
                 <img
-                  src="/reprecent/clear.png"
+                  src="/sandboard/ai.png"
                   alt="Working"
                   className="w-full h-full object-cover"
                 />
@@ -89,7 +89,7 @@ export function TransformationSection() {
             >
               <div className="relative rounded-2xl overflow-hidden min-h-[300px]">
                 <img
-                  src="/reprecent/clear.png"
+                  src="/sandboard/direction.png"
                   alt="Clear"
                   className="w-full h-full object-cover"
                 />

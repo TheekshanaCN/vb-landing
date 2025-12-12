@@ -40,7 +40,11 @@ export function Header() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          <AnimatedButton>Start Free</AnimatedButton>
+          <AnimatedButton
+            onClick={() => window.open("http://localhost:3001", "_blank")}
+          >
+            Start Free
+          </AnimatedButton>
         </div>
 
         <div className="md:hidden w-[20px]">
