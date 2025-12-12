@@ -43,7 +43,7 @@ export function Header() {
 
         <div className="hidden md:flex items-center gap-4">
           <AnimatedButton
-            onClick={() => window.open("http://localhost:3000", "_blank")}
+            onClick={() => window.open("https://app-ideaforge.netlify.app/", "_blank")}
           >
             Start Free
           </AnimatedButton>
