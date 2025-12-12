@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Sparkles } from "lucide-react"
+import Link from "next/link";
+import { Italic } from "lucide-react";
 
 const footerLinks = {
   product: [
@@ -27,7 +27,7 @@ const footerLinks = {
     { label: "Terms of Service", href: "#" },
     { label: "Cookie Policy", href: "#" },
   ],
-}
+};
 
 export function Footer() {
   return (
@@ -40,22 +40,26 @@ export function Footer() {
           {/* Brand column */}
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center overflow-hidden">
-                <Sparkles className="w-5 h-5 text-accent-foreground relative z-10" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              <div className="flex items-center space-x-3">
+                <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center overflow-hidden transition-all duration-300 hover:scale-110 hover:from-accent/90 hover:to-accent/40">
+                  <Italic className="w-5 h-5 text-accent-foreground relative z-10 transition-transform duration-300 hover:rotate-12" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent transition-opacity duration-300 hover:opacity-50" />
+                </div>
+                <span className="font-serif text-2xl text-foreground">
+                  Idea<span className="text-[#d4b999]">Forge</span>
+                </span>
               </div>
-              <span className="font-serif text-2xl text-foreground">
-                Idea<span className="text-accent">Forge</span>
-              </span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs mb-6 leading-relaxed">
-              Transform messy ideas into unicorn blueprints. Visual maps, tech stacks, MVP checklists, and
-              ready-to-build prompts.
+              Transform messy ideas into unicorn blueprints. Visual maps, tech
+              stacks, MVP checklists, and ready-to-build prompts.
             </p>
 
             {/* Newsletter */}
             <div className="space-y-3">
-              <p className="text-sm font-medium text-foreground">Stay updated</p>
+              <p className="text-sm font-medium text-foreground">
+                Stay updated
+              </p>
               <div className="flex gap-2">
                 <input
                   type="email"
@@ -75,7 +79,10 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -88,7 +95,10 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -101,7 +111,10 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -114,7 +127,10 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-accent transition-colors"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -126,17 +142,21 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            <p className="text-sm text-muted-foreground">© 2025 IdeaForge. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">
+              © 2025 IdeaForge. All rights reserved.
+            </p>
             <div className="hidden md:flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-sm text-muted-foreground">All systems operational</span>
+              <span className="text-sm text-muted-foreground">
+                All systems operational
+              </span>
             </div>
           </div>
 
           {/* Social links */}
           <div className="flex items-center gap-4">
             <Link
-              href="#"
+              href="https://x.com/theekshana_c_n"
               className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/30 transition-all"
             >
               <span className="sr-only">Twitter</span>
@@ -145,7 +165,7 @@ export function Footer() {
               </svg>
             </Link>
             <Link
-              href="#"
+              href="https://www.linkedin.com/in/theekshana-chamodhya"
               className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/30 transition-all"
             >
               <span className="sr-only">LinkedIn</span>
@@ -154,7 +174,7 @@ export function Footer() {
               </svg>
             </Link>
             <Link
-              href="#"
+              href="https://github.com/TheekshanaCN"
               className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/30 transition-all"
             >
               <span className="sr-only">GitHub</span>
@@ -166,7 +186,7 @@ export function Footer() {
                 />
               </svg>
             </Link>
-            <Link
+            {/* <Link
               href="#"
               className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/30 transition-all"
             >
@@ -174,10 +194,10 @@ export function Footer() {
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
               </svg>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

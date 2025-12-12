@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Italic } from "lucide-react";
 import { AnimatedButton } from "./animated-button";
 
 export function Header() {
@@ -15,13 +15,15 @@ export function Header() {
     >
       <div className="px-3 py-2 mt-4 flex items-center justify-between bg-white/60 backdrop-blur-lg rounded-full">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center overflow-hidden">
-            <Sparkles className="w-5 h-5 text-accent-foreground relative z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+          <div className="flex items-center space-x-3">
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-accent/60 flex items-center justify-center overflow-hidden transition-all duration-300 hover:scale-110 hover:from-accent/90 hover:to-accent/40">
+              <Italic className="w-5 h-5 text-accent-foreground relative z-10 transition-transform duration-300 hover:rotate-12" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent transition-opacity duration-300 hover:opacity-50" />
+            </div>
+            <span className="font-serif text-2xl text-foreground">
+              Idea<span className="text-[#d4b999]">Forge</span>
+            </span>
           </div>
-          <span className="font-serif text-2xl text-foreground">
-            Sand<span className="text-accent">Board</span>
-          </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">

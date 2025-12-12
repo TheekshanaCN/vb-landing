@@ -32,7 +32,6 @@ export const metadata: Metadata = {
       "Turn chaotic thoughts into visual product maps, AI-powered tech stacks, MVP checklists, and ready-to-build prompts.",
     type: "website",
   },
-  generator: "v0.app",
 };
 
 export const viewport: Viewport = {
