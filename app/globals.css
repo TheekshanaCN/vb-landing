@@ -60,7 +60,7 @@ html {
   --ink: #111827;
 }
 
-.dark {
+/* .dark {
   --background: #0a0a0a;
   --foreground: #f0f0f0;
   --card: #111111;
@@ -93,7 +93,7 @@ html {
   --sidebar-accent-foreground: #e5e5e5;
   --sidebar-border: #262626;
   --sidebar-ring: #d4d4d4;
-}
+} */
 
 .notion {
   --background: #ffffff;

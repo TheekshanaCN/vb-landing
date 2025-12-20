@@ -7,19 +7,15 @@ const footerLinks = {
     { label: "Pricing", href: "#pricing" },
     { label: "How It Works", href: "#how-it-works" },
     { label: "Changelog", href: "#" },
-    { label: "Roadmap", href: "#" },
   ],
   resources: [
     { label: "Documentation", href: "#" },
-    { label: "API Reference", href: "#" },
     { label: "Blog", href: "#" },
-    { label: "Templates", href: "#" },
     { label: "Community", href: "#" },
   ],
   company: [
     { label: "About", href: "#" },
     { label: "Careers", href: "#" },
-    { label: "Press Kit", href: "#" },
     { label: "Contact", href: "#" },
   ],
   legal: [

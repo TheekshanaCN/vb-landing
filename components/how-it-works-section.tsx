@@ -9,7 +9,7 @@ const steps = [
     number: "01",
     icon: PenTool,
     title: "Paste Your Messy Idea",
-    description: "Dump your unstructured thoughts, scattered notes, or voice-to-text rambles. No formatting needed.",
+    description: "Dump your unstructured thoughts, scattered notes, No formatting needed.",
     color: "accent",
   },
   {
