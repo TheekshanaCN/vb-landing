@@ -56,16 +56,14 @@ export function HowItWorksSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <span
-            className={`inline-block px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 transition-all duration-700 ${
-              isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-            }`}
+            className={`inline-block px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 transition-all duration-700 ${isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
+              }`}
           >
             How It Works
           </span>
           <h2
-            className={`font-serif text-4xl md:text-6xl text-foreground mb-6 transition-all duration-700 delay-200 ${
-              isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-            }`}
+            className={`font-serif text-4xl md:text-6xl text-foreground mb-6 transition-all duration-700 delay-200 ${isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
+              }`}
           >
             Four simple steps to
             <br />
@@ -84,9 +82,8 @@ export function HowItWorksSection() {
               return (
                 <div
                   key={step.number}
-                  className={`relative transition-all duration-700 ${
-                    isInView ? "translate-y-0 blur-0" : "translate-y-12 blur-sm"
-                  }`}
+                  className={`relative transition-all duration-700 ${isInView ? "translate-y-0 blur-0" : "translate-y-12 blur-sm"
+                    }`}
                   style={{
                     transitionDelay: `${index * 150}ms`,
                   }}

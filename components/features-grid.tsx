@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Layers,
   GitBranch,
@@ -25,34 +24,13 @@ const BorderBeam = () => {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[inherit]">
       <div className="absolute inset-0 border border-white/5 shadow-[0_0_15px_rgba(255,255,255,0.05)_inset]" />
-      <motion.div
-        className="absolute h-[1px] w-[30%] bg-gradient-to-r from-transparent via-primary/50 to-transparent blur-[2px]"
-        animate={{
-          left: ["-30%", "100%"],
-          top: ["0%", "0%"],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-      <motion.div
-        className="absolute h-[30%] w-[1px] bg-gradient-to-b from-transparent via-chart-2/50 to-transparent blur-[2px]"
-        animate={{
-          top: ["-30%", "100%"],
-          right: ["0%", "0%"],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "linear",
-          delay: 1.5,
-        }}
-      />
+      <div className="absolute h-[1px] w-full bg-gradient-to-r from-transparent via-primary/20 to-transparent top-0 opacity-50" />
+      <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-chart-2/20 to-transparent right-0 opacity-50" />
     </div>
   );
 };
+
+// --- Visual Components for Bento Cards ---
 
 // --- Visual Components for Bento Cards ---
 
@@ -70,48 +48,33 @@ function VisualMapVisual() {
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
 
       {/* Central Node */}
-      <motion.div
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        className="relative z-10 w-20 h-20 rounded-3xl bg-primary shadow-[0_0_30px_rgba(44,44,44,0.3)] flex items-center justify-center border border-white/10"
-      >
-        <Sparkles className="w-10 h-10 text-primary-foreground animate-glow-pulse" />
-        <motion.div
-          className="absolute inset-0 rounded-3xl border-2 border-primary"
-          animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-      </motion.div>
+      <div className="relative z-10 w-20 h-20 rounded-3xl bg-primary shadow-[0_0_30px_rgba(44,44,44,0.3)] flex items-center justify-center border border-white/10">
+        <Sparkles className="w-10 h-10 text-primary-foreground" />
+      </div>
 
       {/* Connection Lines with Animated Pulses */}
       {nodes.map((node, i) => (
-        <motion.div
+        <div
           key={node.label}
           className="absolute px-4 py-2 rounded-2xl bg-card border border-border/80 shadow-xl flex items-center gap-2 z-20"
-          initial={{ opacity: 0, x: 0, y: 0 }}
-          whileInView={{
-            opacity: 1,
-            x: Math.cos(((i * (360 / nodes.length)) * Math.PI) / 180) * 140,
-            y: Math.sin(((i * (360 / nodes.length)) * Math.PI) / 180) * 140,
+          style={{
+            transform: `translate(${Math.cos(((i * (360 / nodes.length)) * Math.PI) / 180) * 140}px, ${Math.sin(((i * (360 / nodes.length)) * Math.PI) / 180) * 140}px)`,
           }}
-          transition={{ delay: i * 0.1, type: "spring", damping: 15 }}
         >
           <node.icon className={`w-4 h-4 ${node.color}`} />
           <span className="text-[10px] font-bold uppercase tracking-wider text-stone-700 whitespace-nowrap">{node.label}</span>
-        </motion.div>
+        </div>
       ))}
 
       {/* Rotating Ring */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-        <motion.circle
+      <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible opacity-20">
+        <circle
           cx="50%" cy="50%" r="140"
           fill="none"
           stroke="currentColor"
           strokeWidth="0.5"
           strokeDasharray="4 8"
           className="text-primary/10"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         />
       </svg>
     </div>
@@ -223,14 +186,10 @@ function VibePromptVisual() {
         </div>
 
         {/* Floating Badges */}
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-4 -right-2 px-3 py-1.5 bg-white border border-stone-200 rounded-full shadow-lg z-20 flex items-center gap-2"
-        >
+        <div className="absolute -top-4 -right-2 px-3 py-1.5 bg-white border border-stone-200 rounded-full shadow-lg z-20 flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-emerald-500" />
           <span className="text-[9px] font-bold text-stone-600 uppercase tracking-tighter">Optimized</span>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
@@ -351,35 +310,11 @@ interface BentoCardProps {
 }
 
 const BentoCard = ({ title, description, icon: Icon, className, visual }: BentoCardProps) => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function onMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
   return (
     <motion.div
       variants={itemVariants}
-      onMouseMove={onMouseMove}
-      className={`group relative overflow-hidden rounded-[2.5rem] border border-stone-200/80 bg-white shadow-[0_8px_32px_-12px_rgba(44,44,44,0.08)] transition-all duration-500 hover:shadow-[0_32px_64px_-16px_rgba(44,44,44,0.12)] hover:-translate-y-1 flex flex-col p-8 ${className}`}
+      className={`group relative overflow-hidden rounded-[2.5rem] border border-stone-200/80 bg-white shadow-[0_8px_32px_-12px_rgba(44,44,44,0.08)] transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col p-8 ${className}`}
     >
-      {/* Mouse Follow Glow */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-[inherit] opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{
-          background: useMotionTemplate`
-                  radial-gradient(
-                    650px circle at ${mouseX}px ${mouseY}px,
-                    rgba(212, 185, 153, 0.15),
-                    transparent 80%
-                  )
-               `,
-        }}
-      />
-
       {/* Shimmer Border */}
       <BorderBeam />
 
@@ -387,10 +322,10 @@ const BentoCard = ({ title, description, icon: Icon, className, visual }: BentoC
       <div className="relative z-10 flex flex-col h-full gap-8">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <div className="p-3 rounded-2xl bg-stone-50 border border-stone-200 shadow-[inset_0_1px_2px_rgba(255,255,255,1)] group-hover:scale-110 transition-transform duration-500">
+          <div className="p-3 rounded-2xl bg-stone-50 border border-stone-200 shadow-[inset_0_1px_2px_rgba(255,255,255,1)] group-hover:scale-105 transition-transform duration-300">
             <Icon className="w-6 h-6 text-stone-800" />
           </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-50 border border-stone-200 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2 transition-all duration-500">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-stone-50 border border-stone-200 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2 transition-all duration-300">
             <ArrowRight className="w-4 h-4 text-stone-700" />
           </div>
         </div>
@@ -402,12 +337,10 @@ const BentoCard = ({ title, description, icon: Icon, className, visual }: BentoC
         </div>
 
         {/* Visual */}
-        <div className="flex-1 min-h-[220px] rounded-3xl bg-stone-50/50 border border-stone-100 overflow-hidden relative group-hover:ring-1 group-hover:ring-stone-200 transition-all duration-700">
-          <div className="absolute inset-0 group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)]">
+        <div className="flex-1 min-h-[220px] rounded-3xl bg-stone-50/50 border border-stone-100 overflow-hidden relative group-hover:ring-1 group-hover:ring-stone-200 transition-all duration-300">
+          <div className="absolute inset-0 group-hover:scale-[1.02] transition-transform duration-500 ease-out">
             {visual}
           </div>
-          {/* Reflection Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
         </div>
       </div>
 
@@ -418,34 +351,19 @@ const BentoCard = ({ title, description, icon: Icon, className, visual }: BentoC
 };
 
 export function FeaturesGrid() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [0.95, 1]);
-
   return (
-    <section ref={containerRef} className="relative py-32 md:py-48 px-6 overflow-hidden bg-[#fdfaf6]">
+    <section className="relative py-24 md:py-32 px-6 overflow-hidden bg-[#fdfaf6]">
       {/* Ambient Background Glow */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-warm-cream/30 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-warm-beige/20 rounded-full blur-[120px] pointer-events-none" />
       {/* Dynamic Background Elements */}
-      <motion.div
-        style={{ opacity }}
-        className="absolute inset-0 pointer-events-none"
-      >
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-px bg-gradient-to-r from-transparent via-stone-200/50 to-transparent" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-px bg-gradient-to-r from-transparent via-stone-200/50 to-transparent" />
         <div className="absolute inset-0 bg-paper-texture opacity-[0.4]" />
-      </motion.div>
+      </div>
 
-      <motion.div
-        style={{ scale }}
-        className="max-w-7xl mx-auto relative z-10"
-      >
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-24 md:mb-32 space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -537,7 +455,7 @@ export function FeaturesGrid() {
             visual={<VibePromptVisual />}
           />
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

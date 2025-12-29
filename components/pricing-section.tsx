@@ -8,29 +8,31 @@ import { Check, Sparkles, Zap, Rocket } from "lucide-react"
 
 const plans = [
   {
-    name: "Starter",
+    name: "Explorer",
     icon: Sparkles,
+    credits: "10",
+    unit: "Credits",
+    description: "Perfect for testing your first ideas",
     price: "Free",
-    period: "forever",
-    description: "Perfect for exploring ideas",
     features: [
-      "3 idea transformations/month",
+      "10 AI Credits included",
       "Visual node maps",
       "Basic tech recommendations",
       "MVP checklist",
-      "Community support",
+      "Access to community",
     ],
-    cta: "Start Free",
+    cta: "Get Started",
     popular: false,
   },
   {
-    name: "Builder",
+    name: "Builder Pack",
     icon: Zap,
+    credits: "100",
+    unit: "Credits",
+    description: "For serious founders building MVPs",
     price: "$29",
-    period: "/month",
-    description: "For serious founders",
     features: [
-      "Unlimited transformations",
+      "100 AI Credits",
       "Advanced node maps with export",
       "AI-curated tech stacks",
       "Full MVP kanban boards",
@@ -39,17 +41,18 @@ const plans = [
       "Version history",
       "Priority support",
     ],
-    cta: "Start Building",
+    cta: "Buy Credits",
     popular: true,
   },
   {
-    name: "Enterprise",
+    name: "Elite Bundle",
     icon: Rocket,
+    credits: "500",
+    unit: "Credits",
+    description: "Maximum power for power users",
     price: "$99",
-    period: "/month",
-    description: "For teams & agencies",
     features: [
-      "Everything in Builder",
+      "500 AI Credits",
       "Team collaboration (up to 10)",
       "White-label exports",
       "API access",
@@ -58,7 +61,7 @@ const plans = [
       "Advanced analytics",
       "SLA guarantee",
     ],
-    cta: "Contact Sales",
+    cta: "Buy Bundle",
     popular: false,
   },
 ]
@@ -91,15 +94,15 @@ export function PricingSection() {
             className={`font-serif text-4xl md:text-6xl text-foreground mb-6 transition-all duration-700 delay-200 ${isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
               }`}
           >
-            Simple, transparent
+            Pay as you grow
             <br />
-            <span className="italic text-muted-foreground">pricing</span>
+            <span className="italic text-muted-foreground">credit system</span>
           </h2>
           <p
             className={`max-w-2xl mx-auto text-lg text-muted-foreground transition-all duration-700 delay-400 ${isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
               }`}
           >
-            Start free, upgrade when you're ready to build your unicorn
+            No subscriptions. No hidden fees. Buy credits and use them whenever you need to build your unicorn.
           </p>
         </div>
 
@@ -136,7 +139,7 @@ export function PricingSection() {
                       <p className="text-sm text-muted-foreground mb-4">{plan.description}</p>
                       <div className="flex items-baseline gap-1">
                         <span className="text-4xl font-serif text-foreground">{plan.price}</span>
-                        <span className="text-muted-foreground">{plan.period}</span>
+                        <span className="text-muted-foreground">/ {plan.credits} {plan.unit}</span>
                       </div>
                     </div>
 
