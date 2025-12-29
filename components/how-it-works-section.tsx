@@ -41,75 +41,38 @@ export function HowItWorksSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { threshold: 0.1 })
 
-  const getColorClasses = (color: string) => {
-    const colors: Record<string, { bg: string; border: string; text: string }> = {
-      accent: { bg: "bg-accent/10", border: "border-accent/30", text: "text-accent" },
-      purple: { bg: "bg-purple-500/10", border: "border-purple-500/30", text: "text-purple-400" },
-      blue: { bg: "bg-blue-500/10", border: "border-blue-500/30", text: "text-blue-400" },
-      green: { bg: "bg-green-500/10", border: "border-green-500/30", text: "text-green-400" },
-    }
-    return colors[color] || colors.accent
-  }
-
   return (
-    <section ref={sectionRef} id="how-it-works" className="relative py-32 px-6 bg-secondary/20">
+    <section ref={sectionRef} id="how-it-works" className="relative py-24 md:py-32 px-4 md:px-6 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <span
-            className={`inline-block px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6 transition-all duration-700 ${isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-              }`}
-          >
-            How It Works
-          </span>
-          <h2
-            className={`font-serif text-4xl md:text-6xl text-foreground mb-6 transition-all duration-700 delay-200 ${isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-              }`}
-          >
-            Four simple steps to
-            <br />
-            <span className="italic text-muted-foreground">your unicorn</span>
+        <div className="text-center mb-16 md:mb-24 space-y-4 md:space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/40 text-[10px] font-bold uppercase tracking-widest mb-4">
+            Process
+          </div>
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
+            Four steps to <br />
+            <span className="text-white/30 italic">deployment.</span>
           </h2>
         </div>
 
         <div className="relative">
-          {/* Connection line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent -translate-y-1/2" />
-
-          <div className="grid lg:grid-cols-4 gap-8 lg:gap-4">
+          <div className="grid lg:grid-cols-4 gap-8">
             {steps.map((step, index) => {
               const Icon = step.icon
-              const colors = getColorClasses(step.color)
               return (
                 <div
                   key={step.number}
-                  className={`relative transition-all duration-700 ${isInView ? "translate-y-0 blur-0" : "translate-y-12 blur-sm"
-                    }`}
-                  style={{
-                    transitionDelay: `${index * 150}ms`,
-                  }}
+                  className="relative group p-6 md:p-8 rounded-2xl md:rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500"
                 >
-                  <div className="relative p-8 rounded-2xl bg-card/50 border border-border backdrop-blur-sm h-full">
-                    {/* Number badge */}
-                    <div className="absolute -top-4 -right-4 w-12 h-12 rounded-xl bg-background border-2 border-border flex items-center justify-center">
-                      <span className="font-mono text-lg font-bold text-muted-foreground">{step.number}</span>
-                    </div>
-
-                    {/* Icon */}
-                    <div
-                      className={`w-14 h-14 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center mb-6`}
-                    >
-                      <Icon className={`w-7 h-7 ${colors.text}`} />
-                    </div>
-
-                    {/* Content */}
-                    <h3 className="font-serif text-xl text-foreground mb-3">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+                  <div className="absolute -top-3 md:-top-4 -right-3 md:-right-4 w-8 md:w-10 h-8 md:h-10 rounded-lg md:rounded-xl bg-black border border-white/10 flex items-center justify-center">
+                    <span className="font-mono text-[10px] md:text-xs font-bold text-white/40">{step.number}</span>
                   </div>
 
-                  {/* Connector dot */}
-                  {/* <div
-                    className={`hidden lg:block absolute top-1/2 -right-2 w-4 h-4 rounded-full ${colors.bg} border-2 ${colors.border} -translate-y-1/2 z-10`}
-                  /> */}
+                  <div className="w-10 md:w-12 h-10 md:h-12 rounded-xl md:rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center mb-6 md:mb-8 group-hover:bg-white group-hover:text-black transition-all duration-500">
+                    <Icon className="w-5 md:w-6 h-5 md:h-6" />
+                  </div>
+
+                  <h3 className="text-base md:text-lg font-bold text-white mb-3 uppercase tracking-tight">{step.title}</h3>
+                  <p className="text-xs md:text-sm text-white/40 leading-relaxed font-light">{step.description}</p>
                 </div>
               )
             })}
