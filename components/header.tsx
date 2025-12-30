@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, Italic } from "lucide-react";
 import { AnimatedButton } from "./animated-button";
+import Image from "next/image";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,8 +15,13 @@ export function Header() {
         <div className="glass px-4 py-3 flex items-center justify-between rounded-2xl border border-white/5 backdrop-blur-xl bg-black/40">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
-                <div className="w-4 h-4 bg-black rounded-sm" />
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Image
+                  src="/icon.svg"
+                  alt="App Icon"
+                  width={32}
+                  height={32}
+                />
               </div>
               <span className="font-sans font-bold text-xl tracking-tight text-white">
                 Idea<span className="opacity-50">Forge</span>
@@ -58,8 +64,8 @@ export function Header() {
       {/* Mobile menu */}
       <div
         className={`md:hidden absolute top-24 left-6 right-6 bg-black/90 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 transition-all duration-300 ${isOpen
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-4 pointer-events-none"
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-4 pointer-events-none"
           }`}
       >
         <nav className="flex flex-col gap-4">

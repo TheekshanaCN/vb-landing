@@ -16,7 +16,7 @@ export default function Home() {
     <main className="min-h-screen bg-background relative selection:bg-white selection:text-black overflow-x-hidden">
       <Header />
       <HeroSection />
-      <div className="space-y-16 md:space-y-32 pb-32">
+      <div className="space-y-16 md:space-y-24 pb-32">
         <LogoMarquee />
         <UseCasesSection />
         <TransformationSection />

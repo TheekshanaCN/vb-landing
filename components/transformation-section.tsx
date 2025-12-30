@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useInView } from "@/hooks/use-in-view";
 import { ArrowRight, Sparkles, Cpu } from "lucide-react";
+import Image from "next/image";
 
 export function TransformationSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -32,14 +33,14 @@ export function TransformationSection() {
 
           {/* Card 1 */}
           <div className="relative z-10 space-y-6 group">
-            <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-              <div className="w-full h-full bg-black/40 flex items-center justify-center p-8">
-                <div className="space-y-2 opacity-20">
-                  <div className="h-2 w-32 bg-white rounded" />
-                  <div className="h-2 w-24 bg-white rounded" />
-                  <div className="h-2 w-40 bg-white rounded" />
-                </div>
-              </div>
+            <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
+              <Image
+                src="/sandboard/inv.png"
+                alt="Preview"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
             <div className="text-center space-y-2">
               <h3 className="text-lg font-bold text-white uppercase tracking-wider">Raw Ideas</h3>
@@ -49,11 +50,14 @@ export function TransformationSection() {
 
           {/* Card 2 */}
           <div className="relative z-10 space-y-6 group">
-            <div className="aspect-[4/3] rounded-3xl border border-white/10 bg-white/[0.05] overflow-hidden group-hover:border-white/20 transition-all duration-700 shadow-2xl">
-              <div className="w-full h-full bg-black flex items-center justify-center p-8 relative overflow-hidden">
-                <div className="absolute inset-0 bg-white/[0.02] animate-pulse" />
-                <Cpu className="w-12 h-12 text-white animate-fade-in" />
-              </div>
+            <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
+              <Image
+                src="/sandboard/aib.png"
+                alt="Preview"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
             <div className="text-center space-y-2">
               <h3 className="text-lg font-bold text-white uppercase tracking-wider">AI Synthesis</h3>
@@ -63,17 +67,14 @@ export function TransformationSection() {
 
           {/* Card 3 */}
           <div className="relative z-10 space-y-6 group">
-            <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden group-hover:border-white/10 transition-all duration-700">
-              <div className="w-full h-full bg-black/40 flex items-center justify-center p-8">
-                <div className="w-full space-y-3">
-                  <div className="h-8 w-full rounded-lg bg-white/10 border border-white/10 flex items-center px-3">
-                    <div className="h-1.5 w-1/2 bg-white/20 rounded" />
-                  </div>
-                  <div className="h-8 w-full rounded-lg bg-white/5 border border-white/5 flex items-center px-3">
-                    <div className="h-1.5 w-1/3 bg-white/10 rounded" />
-                  </div>
-                </div>
-              </div>
+            <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
+              <Image
+                src="/sandboard/dir.png"
+                alt="Preview"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
             <div className="text-center space-y-2">
               <h3 className="text-lg font-bold text-white uppercase tracking-wider">Production Roadmap</h3>
