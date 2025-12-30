@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Italic } from "lucide-react";
+import Image from "next/image";
 
 const footerLinks = {
   product: [
@@ -33,8 +34,13 @@ export function Footer() {
           {/* Brand column */}
           <div className="md:col-span-2 space-y-8">
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
-                <div className="w-4 h-4 bg-black rounded-sm" />
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Image
+                  src="/icon.svg"
+                  alt="App Icon"
+                  width={32}
+                  height={32}
+                />
               </div>
               <span className="font-sans text-xl font-bold tracking-tight text-white uppercase">
                 Idea<span className="text-white/40">Forge</span>
