@@ -8,29 +8,31 @@ import { Check, Sparkles, Zap, Rocket } from "lucide-react"
 
 const plans = [
   {
-    name: "Starter",
+    name: "Explorer",
     icon: Sparkles,
+    credits: "10",
+    unit: "Credits",
+    description: "Perfect for testing your first ideas",
     price: "Free",
-    period: "forever",
-    description: "Perfect for exploring ideas",
     features: [
-      "3 idea transformations/month",
+      "10 AI Credits included",
       "Visual node maps",
       "Basic tech recommendations",
       "MVP checklist",
-      "Community support",
+      "Access to community",
     ],
-    cta: "Start Free",
+    cta: "Get Started",
     popular: false,
   },
   {
-    name: "Builder",
+    name: "Builder Pack",
     icon: Zap,
+    credits: "100",
+    unit: "Credits",
+    description: "For serious founders building MVPs",
     price: "$29",
-    period: "/month",
-    description: "For serious founders",
     features: [
-      "Unlimited transformations",
+      "100 AI Credits",
       "Advanced node maps with export",
       "AI-curated tech stacks",
       "Full MVP kanban boards",
@@ -39,17 +41,18 @@ const plans = [
       "Version history",
       "Priority support",
     ],
-    cta: "Start Building",
+    cta: "Buy Credits",
     popular: true,
   },
   {
-    name: "Enterprise",
+    name: "Elite Bundle",
     icon: Rocket,
+    credits: "500",
+    unit: "Credits",
+    description: "Maximum power for power users",
     price: "$99",
-    period: "/month",
-    description: "For teams & agencies",
     features: [
-      "Everything in Builder",
+      "500 AI Credits",
       "Team collaboration (up to 10)",
       "White-label exports",
       "API access",
@@ -58,7 +61,7 @@ const plans = [
       "Advanced analytics",
       "SLA guarantee",
     ],
-    cta: "Contact Sales",
+    cta: "Buy Bundle",
     popular: false,
   },
 ]
@@ -71,38 +74,22 @@ export function PricingSection() {
     <section
       ref={sectionRef}
       id="pricing"
-      className="relative py-32 px-6 bg-gradient-to-b from-secondary/20 to-background"
+      className="relative py-24 md:py-32 px-4 md:px-6 bg-background overflow-hidden"
     >
       {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
-      </div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[800px] h-[300px] md:h-[400px] bg-white/[0.02] rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <span
-            className={`inline-block px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-6 transition-all duration-700 ${
-              isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-            }`}
-          >
+        <div className="text-center mb-16 md:mb-24 space-y-4 md:space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/40 text-[10px] font-bold uppercase tracking-widest mb-4">
             Pricing
-          </span>
-          <h2
-            className={`font-serif text-4xl md:text-6xl text-foreground mb-6 transition-all duration-700 delay-200 ${
-              isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-            }`}
-          >
-            Simple, transparent
-            <br />
-            <span className="italic text-muted-foreground">pricing</span>
+          </div>
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
+            Pay as you <br />
+            <span className="text-white/30 italic">scale.</span>
           </h2>
-          <p
-            className={`max-w-2xl mx-auto text-lg text-muted-foreground transition-all duration-700 delay-400 ${
-              isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-            }`}
-          >
-            Start free, upgrade when you're ready to build your unicorn
+          <p className="max-w-2xl mx-auto text-base md:text-lg text-white/50 px-4">
+            No subscriptions. No hidden fees. Buy credits and use them whenever you need to build your SaaS.
           </p>
         </div>
 
@@ -112,80 +99,58 @@ export function PricingSection() {
             return (
               <div
                 key={plan.name}
-                className={`relative transition-all duration-700 ${
-                  isInView ? "translate-y-0 blur-0" : "translate-y-12 blur-sm"
-                }`}
-                style={{
-                  transitionDelay: `${index * 150 + 600}ms`,
-                }}
+                className="relative group h-full flex flex-col p-6 md:p-8 rounded-2xl md:rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500"
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium">
+                  <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white text-black text-[9px] md:text-[10px] font-bold uppercase tracking-widest z-20">
                     Most Popular
                   </div>
                 )}
 
-                <FlashlightCard
-                  className={`h-full ${plan.popular ? "border-accent/50 shadow-lg shadow-accent/10" : ""}`}
-                >
-                  <div className="p-8 h-full flex flex-col">
-                    {/* Icon */}
-                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
-                      <Icon className="w-6 h-6 text-accent" />
-                    </div>
-
-                    {/* Header */}
-                    <div className="mb-6">
-                      <h3 className="font-serif text-2xl text-foreground mb-2">{plan.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-4">{plan.description}</p>
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-4xl font-serif text-foreground">{plan.price}</span>
-                        <span className="text-muted-foreground">{plan.period}</span>
-                      </div>
-                    </div>
-
-                    {/* Features */}
-                    <ul className="space-y-3 mb-8 flex-1">
-                      {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                          <span className="text-sm text-muted-foreground">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* CTA */}
-                    <AnimatedButton className="w-full justify-center" variant={plan.popular ? "primary" : "secondary"}>
-                      {plan.cta}
-                    </AnimatedButton>
+                <div className="flex-1 flex flex-col">
+                  {/* Icon */}
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-6 md:mb-8">
+                    <Icon className="w-5 h-5 text-white" />
                   </div>
-                </FlashlightCard>
+
+                  {/* Header */}
+                  <div className="mb-6 md:mb-8">
+                    <h3 className="text-lg md:text-xl font-bold text-white mb-2 uppercase tracking-tight">{plan.name}</h3>
+                    <p className="text-xs md:text-sm text-white/40 mb-4 md:mb-6">{plan.description}</p>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-3xl md:text-4xl font-bold text-white">{plan.price}</span>
+                      <span className="text-white/20 text-xs md:text-sm">/ {plan.credits} {plan.unit}</span>
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-3 md:space-y-4 mb-8 md:mb-12 flex-1">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <Check className="w-4 h-4 text-white/40 flex-shrink-0 mt-0.5" />
+                        <span className="text-xs md:text-sm text-white/60 font-medium leading-relaxed">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA */}
+                  <AnimatedButton className={`w-full justify-center py-4 md:py-6 text-xs md:text-sm font-bold uppercase tracking-widest rounded-xl md:rounded-2xl ${plan.popular ? "bg-white text-black" : "bg-white/5 text-white hover:bg-white/10"}`}>
+                    {plan.cta}
+                  </AnimatedButton>
+                </div>
               </div>
             )
           })}
         </div>
 
         {/* Additional info */}
-        <div
-          className={`mt-16 text-center transition-all duration-700 delay-1200 ${
-            isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-          }`}
-        >
-          <p className="text-muted-foreground mb-4">All plans include 14-day money-back guarantee</p>
-          <div className="flex items-center justify-center gap-8 flex-wrap">
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-accent" />
-              <span className="text-sm text-muted-foreground">No credit card required</span>
+        <div className="mt-16 md:mt-24 flex items-center justify-center gap-6 md:gap-12 flex-wrap opacity-40 px-4">
+          {['No credit card required', 'Cancel anytime', 'Instant access'].map(info => (
+            <div key={info} className="flex items-center gap-2">
+              <Check className="w-3 h-3 md:w-4 md:h-4" />
+              <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest">{info}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-accent" />
-              <span className="text-sm text-muted-foreground">Cancel anytime</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-accent" />
-              <span className="text-sm text-muted-foreground">Instant access</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

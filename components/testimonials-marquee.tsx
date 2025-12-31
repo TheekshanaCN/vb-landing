@@ -1,196 +1,117 @@
 "use client"
 
-import { useRef } from "react"
-import { useInView } from "@/hooks/use-in-view"
-import { FlashlightCard } from "./flashlight-card"
-import { Star } from "lucide-react"
+import { motion } from "framer-motion"
+import { Github, Globe, CheckCircle2, Terminal, Code2 } from "lucide-react"
 
 const testimonials = [
   {
-    quote:
-      "I went from a napkin sketch to a fully funded startup in 4 months. IdeaForge's blueprint was my north star.",
-    author: "Sarah Chen",
-    role: "Founder, StreamlineHQ",
-    company: "Raised $2.3M",
-    avatar: "/female-founder-portrait-asian-professional.jpg",
+    quote: "The prompt engineering engine is remarkably precise. It cut our MVP ideation cycle from 2 weeks to 48 hours. The visual node mapping is a game-changer for architecture alignment.",
+    author: "Alex Rivers",
+    role: "Lead Engineer @ Vercel",
+    tag: "Next.js 15 / AI Architecture",
+    github: "arivers-dev",
+    metric: "2.4x Faster Shipping",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80",
+    size: "col-span-12 md:col-span-7",
   },
   {
-    quote:
-      "The visual node maps finally helped my co-founder understand my vision. We were aligned for the first time ever.",
-    author: "Marcus Johnson",
-    role: "CTO, BuildFast",
-    company: "YC S24",
-    avatar: "/male-founder-portrait-african-american-professiona.jpg",
+    quote: "Finally, a tool that understands the bridge between a 'vibe' and a 'build'. Blueprints that actually make sense to engineers.",
+    author: "Jordan Smith",
+    role: "Senior Fullstack",
+    tag: "OSS Contributor",
+    github: "jsmith-codes",
+    metric: "Logic Verified",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&q=80",
+    size: "col-span-12 md:col-span-5",
   },
   {
-    quote: "Used the generated prompt in v0 and had a working prototype in 3 hours. This is the future of building.",
-    author: "Elena Rodriguez",
-    role: "Solo Founder, LaunchPad",
-    company: "1000+ users",
-    avatar: "/female-founder-portrait-latina-professional.jpg",
+    quote: "The SVG node export documentation saved us weeks of manual diagramming. Essential for technical founders.",
+    author: "Samantha Lee",
+    role: "CTO @ Nexus",
+    tag: "Go / Microservices",
+    github: "sam-builds",
+    metric: "Diagrams Automated",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&q=80",
+    size: "col-span-12 md:col-span-5",
   },
   {
-    quote: "The MVP checklist alone saved me from scope creep. Launched lean, validated fast, then scaled.",
-    author: "David Kim",
-    role: "CEO, Nexus AI",
-    company: "Series A",
-    avatar: "/male-founder-portrait-korean-professional.jpg",
-  },
-  {
-    quote: "I'm not technical at all. IdeaForge translated my ideas into language that developers actually understood.",
-    author: "Amanda Foster",
-    role: "Founder, ScaleUp",
-    company: "$50K MRR",
-    avatar: "/female-entrepreneur-portrait-professional-blonde.jpg",
-  },
-  {
-    quote: "Every idea I have now goes through IdeaForge first. It's like having a CTO in my pocket.",
-    author: "James Wright",
-    role: "Serial Entrepreneur",
-    company: "3 exits",
-    avatar: "/male-entrepreneur-portrait-professional-gray-hair.jpg",
-  },
-]
-
-const secondRow = [
-  {
-    quote: "The tech stack recommendations were spot on. Would've taken weeks to figure that out myself.",
-    author: "Lisa Park",
-    role: "Founder, DataFlow",
-    company: "Backed by a16z",
-    avatar: "/female-founder-asian-professional-portrait.jpg",
-  },
-  {
-    quote:
-      "Showed my IdeaForge blueprint to investors. They said it was the clearest pitch deck alternative they'd seen.",
-    author: "Michael Torres",
-    role: "CEO, QuickShip",
-    company: "$1.2M raised",
-    avatar: "/male-founder-hispanic-professional-portrait.jpg",
-  },
-  {
-    quote: "From 50 sticky notes of chaos to a clear product vision in 10 minutes. Absolutely magical.",
-    author: "Rachel Green",
-    role: "Product Lead, TechStart",
-    company: "Ex-Google",
-    avatar: "/female-professional-portrait-redhead.jpg",
-  },
-  {
-    quote: "The market insights feature helped us pivot before wasting 6 months on the wrong product.",
-    author: "Chris Anderson",
-    role: "Co-founder, Metric",
-    company: "Profitable in 8mo",
-    avatar: "/male-founder-portrait-professional-beard.jpg",
-  },
-  {
-    quote: "Our entire agency uses IdeaForge for client discovery. Cuts our planning phase in half.",
-    author: "Nina Patel",
-    role: "Agency Owner, DigitalFirst",
-    company: "100+ clients",
-    avatar: "/female-founder-indian-professional-portrait.jpg",
-  },
-  {
-    quote: "Best $29 I spend every month. The ROI is insane when you calculate time saved.",
-    author: "Tom Baker",
-    role: "Indie Hacker",
-    company: "5 micro-SaaS",
-    avatar: "/male-developer-portrait-casual-professional.jpg",
+    quote: "IdeaForge transforms messy logic into production-ready prompts. It's the standard start for all our internal tools.",
+    author: "Marcus Wright",
+    role: "DX Engineer",
+    tag: "TS / Infrastructure",
+    github: "marcus-sys",
+    metric: "Clean Prompt Output",
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&q=80",
+    size: "col-span-12 md:col-span-7",
   },
 ]
 
 export function TestimonialsMarquee() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { threshold: 0.1 })
-
   return (
-    <section ref={sectionRef} id="testimonials" className="py-32 bg-background overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-16">
-        <div className="text-center">
-          <span
-            className={`inline-block px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-sm font-medium mb-6 transition-all duration-700 ${
-              isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-            }`}
-          >
-            Testimonials
-          </span>
-          <h2
-            className={`font-serif text-4xl md:text-6xl text-foreground mb-6 transition-all duration-700 delay-200 ${
-              isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-            }`}
-          >
-            Loved by founders
-            <br />
-            <span className="italic text-muted-foreground">building the future</span>
-          </h2>
+    <section id="testimonials" className="relative py-32 px-6 bg-background overflow-hidden selection:bg-white selection:text-black">
+      {/* Subtle background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/[0.01] rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
+          <div className="space-y-6 text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/40 text-[10px] font-bold uppercase tracking-widest">
+              Success Logs
+            </div>
+            <h2 className="font-sans text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+              Trusted by <span className="text-white/30 italic">architects.</span>
+            </h2>
+          </div>
+          <div className="hidden lg:block">
+            <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02]">
+              <div className="text-4xl font-bold text-white mb-1">2.5k+</div>
+              <div className="text-white/20 text-[10px] font-bold uppercase tracking-widest">Architectures Shipped</div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* First row - left to right */}
-      <div className="relative mb-6">
-        <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-background to-transparent z-10" />
-
-        <div className="flex animate-marquee-slow">
-          {[...testimonials, ...testimonials].map((testimonial, index) => (
-            <div key={index} className="shrink-0 w-[380px] mx-3">
-              <FlashlightCard>
-                <div className="p-6">
-                  <div className="flex gap-1 mb-4">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    ))}
+        <div className="grid grid-cols-12 gap-6">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`${t.size} group relative bg-white/[0.02] border border-white/5 p-8 md:p-10 rounded-3xl hover:bg-white/[0.04] transition-all duration-500 flex flex-col justify-between min-h-[350px] shadow-2xl shadow-black`}
+            >
+              <div className="space-y-8">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center border border-white/10">
+                    <Code2 className="w-5 h-5 text-white" />
                   </div>
-                  <p className="text-foreground mb-6 leading-relaxed text-sm">{`"${testimonial.quote}"`}</p>
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={testimonial.avatar || "/placeholder.svg"}
-                      alt={testimonial.author}
-                      className="w-10 h-10 rounded-full object-cover bg-secondary"
-                    />
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-foreground">{testimonial.author}</p>
-                      <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                    </div>
-                    <div className="px-2 py-1 rounded bg-accent/10 text-accent text-xs">{testimonial.company}</div>
+                  <div className="px-3 py-1 bg-white/5 rounded-full border border-white/5">
+                    <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{t.metric}</span>
                   </div>
                 </div>
-              </FlashlightCard>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Second row - right to left */}
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-background to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-background to-transparent z-10" />
+                <blockquote className="text-xl md:text-2xl text-white/80 leading-relaxed font-medium italic">
+                  &quot;{t.quote}&quot;
+                </blockquote>
+              </div>
 
-        <div className="flex animate-marquee-reverse">
-          {[...secondRow, ...secondRow].map((testimonial, index) => (
-            <div key={index} className="shrink-0 w-[380px] mx-3">
-              <FlashlightCard>
-                <div className="p-6">
-                  <div className="flex gap-1 mb-4">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    ))}
-                  </div>
-                  <p className="text-foreground mb-6 leading-relaxed text-sm">{`"${testimonial.quote}"`}</p>
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={testimonial.avatar || "/placeholder.svg"}
-                      alt={testimonial.author}
-                      className="w-10 h-10 rounded-full object-cover bg-secondary"
-                    />
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-foreground">{testimonial.author}</p>
-                      <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                    </div>
-                    <div className="px-2 py-1 rounded bg-accent/10 text-accent text-xs">{testimonial.company}</div>
+              <div className="mt-12 flex items-center justify-between border-t border-white/5 pt-8">
+                <div className="flex items-center gap-4">
+                  <img
+                    src={t.avatar}
+                    alt={t.author}
+                    className="w-12 h-12 rounded-xl object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                  />
+                  <div>
+                    <h4 className="text-white font-bold text-sm tracking-tight">{t.author}</h4>
+                    <p className="text-white/30 text-[10px] uppercase font-bold tracking-widest">{t.role}</p>
                   </div>
                 </div>
-              </FlashlightCard>
-            </div>
+                <div className="flex items-center gap-3 opacity-20 group-hover:opacity-100 transition-all duration-500">
+                  <Github className="w-4 h-4 text-white" />
+                  <span className="text-[10px] font-mono text-white">/{t.github}</span>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

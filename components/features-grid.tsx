@@ -1,268 +1,135 @@
-"use client"
+"use client";
 
-import { useState, useRef } from "react"
-import { useInView } from "@/hooks/use-in-view"
-import { Layers, Wand2, GitBranch, Zap, FileCode, Cpu, Box, Sparkles, Settings, Play } from "lucide-react"
-
-const features = [
-  {
-    id: "ai-generation",
-    title: "AI Blueprint Generation",
-    description: "Transform your ideas into detailed technical blueprints with our advanced AI engine.",
-    visual: "generation",
-  },
-  {
-    id: "smart-components",
-    title: "Smart Component Library",
-    description: "Access thousands of pre-built components that adapt intelligently to your project needs.",
-    visual: "components",
-  },
-  {
-    id: "version-control",
-    title: "Seamless Version Control",
-    description: "Track changes, collaborate with your team, and roll back to any previous version instantly.",
-    visual: "version",
-  },
-  {
-    id: "instant-export",
-    title: "One-Click Export",
-    description: "Export production-ready code, documentation, and assets in your preferred format.",
-    visual: "export",
-  },
-]
-
-function GenerationVisual() {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2 mb-4">
-        <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-        <span className="text-xs text-muted-foreground">AI Processing...</span>
-      </div>
-      <div className="grid grid-cols-2 gap-3">
-        {["Layout", "Schema", "API", "Database"].map((item, i) => (
-          <div
-            key={item}
-            className="bg-card rounded-xl p-4 border border-border/40 hover:border-primary/40 transition-all duration-300"
-            style={{ animationDelay: `${i * 100}ms` }}
-          >
-            <div className="flex items-center gap-2 mb-3">
-              <Wand2 className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-foreground">{item}</span>
-            </div>
-            <div className="space-y-1.5">
-              <div
-                className="h-1.5 bg-primary/20 rounded-full w-full animate-pulse"
-                style={{ animationDelay: `${i * 150}ms` }}
-              />
-              <div className="h-1.5 bg-muted-foreground/10 rounded-full w-4/5" />
-              <div className="h-1.5 bg-muted-foreground/10 rounded-full w-3/5" />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="flex items-center justify-center gap-2 pt-2">
-        <Sparkles className="w-4 h-4 text-primary" />
-        <span className="text-xs text-muted-foreground">Generating blueprint...</span>
-      </div>
-    </div>
-  )
-}
-
-function ComponentsVisual() {
-  const components = [
-    { name: "Button", icon: Box, color: "#6366F1" },
-    { name: "Form", icon: FileCode, color: "#10B981" },
-    { name: "Modal", icon: Layers, color: "#F59E0B" },
-    { name: "Table", icon: Settings, color: "#EF4444" },
-    { name: "Chart", icon: Cpu, color: "#8B5CF6" },
-    { name: "Card", icon: Box, color: "#06B6D4" },
-  ]
-
-  return (
-    <div className="grid grid-cols-3 gap-3">
-      {components.map((comp, index) => {
-        const Icon = comp.icon
-        return (
-          <div
-            key={comp.name}
-            className="bg-card rounded-xl p-4 border border-border/40 hover:border-border hover:shadow-md transition-all duration-300 cursor-pointer group"
-          >
-            <div className="flex flex-col items-center gap-2">
-              <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundColor: `${comp.color}15` }}
-              >
-                <Icon className="w-5 h-5" style={{ color: comp.color }} />
-              </div>
-              <span className="text-xs text-foreground font-medium">{comp.name}</span>
-            </div>
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-function VersionVisual() {
-  const commits = [
-    { id: "a3f2b1", message: "Added auth flow", time: "2m ago", active: true },
-    { id: "b7c4e2", message: "Updated schema", time: "1h ago", active: false },
-    { id: "c9d5f3", message: "Initial blueprint", time: "3h ago", active: false },
-  ]
-
-  return (
-    <div className="space-y-3">
-      <div className="flex items-center gap-2 mb-4">
-        <GitBranch className="w-4 h-4 text-primary" />
-        <span className="text-sm font-medium text-foreground">main</span>
-        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">3 commits</span>
-      </div>
-      {commits.map((commit, i) => (
-        <div
-          key={commit.id}
-          className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-300 ${
-            commit.active ? "bg-primary/5 border-primary/30" : "bg-card border-border/40 hover:border-border"
-          }`}
-        >
-          <div className={`w-3 h-3 rounded-full ${commit.active ? "bg-primary" : "bg-muted-foreground/30"}`} />
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2">
-              <code className="text-xs text-muted-foreground font-mono">{commit.id}</code>
-              <span className="text-sm text-foreground truncate">{commit.message}</span>
-            </div>
-          </div>
-          <span className="text-xs text-muted-foreground">{commit.time}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function ExportVisual() {
-  const formats = [
-    { name: "React", ext: ".tsx", color: "#61DAFB" },
-    { name: "Vue", ext: ".vue", color: "#4FC08D" },
-    { name: "Docs", ext: ".md", color: "#6366F1" },
-    { name: "API", ext: ".json", color: "#F59E0B" },
-  ]
-
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-3">
-        {formats.map((format) => (
-          <div
-            key={format.name}
-            className="bg-card rounded-xl p-4 border border-border/40 hover:border-border transition-all duration-300 cursor-pointer group"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-medium text-foreground">{format.name}</span>
-              <code
-                className="text-xs px-2 py-0.5 rounded"
-                style={{ backgroundColor: `${format.color}15`, color: format.color }}
-              >
-                {format.ext}
-              </code>
-            </div>
-            <div className="space-y-1.5">
-              <div className="h-1.5 bg-muted-foreground/10 rounded-full w-full" />
-              <div className="h-1.5 bg-muted-foreground/10 rounded-full w-3/4" />
-            </div>
-          </div>
-        ))}
-      </div>
-      <button className="w-full flex items-center justify-center gap-2 py-3 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-colors">
-        <Zap className="w-4 h-4" />
-        <span className="text-sm font-medium">Export All</span>
-      </button>
-    </div>
-  )
-}
+import {
+  Workflow,
+  Cpu,
+  Layers,
+  Sparkles,
+  Layout,
+  Zap,
+} from "lucide-react";
 
 export function FeaturesGrid() {
-  const [activeFeature, setActiveFeature] = useState("ai-generation")
-  const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { threshold: 0.05 })
-
-  const renderVisual = () => {
-    switch (activeFeature) {
-      case "ai-generation":
-        return <GenerationVisual />
-      case "smart-components":
-        return <ComponentsVisual />
-      case "version-control":
-        return <VersionVisual />
-      case "instant-export":
-        return <ExportVisual />
-      default:
-        return <GenerationVisual />
-    }
-  }
-
   return (
-    <section ref={sectionRef} id="features" className="relative py-24 md:py-32 px-6 bg-background">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Left side - Title and accordion */}
-          <div
-            className={`transition-all duration-700 ${
-              isInView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-            }`}
-          >
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground italic mb-12">
-              Build Smarter with AI
-            </h2>
+    <section id="features" className="relative py-24 md:py-32 px-4 md:px-6 bg-background overflow-hidden selection:bg-white selection:text-black">
+      {/* Subtle background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[800px] h-[300px] md:h-[400px] bg-white/[0.02] rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
 
-            <div className="space-y-0">
-              {features.map((feature, index) => (
-                <div
-                  key={feature.id}
-                  className={`border-b border-border/60 transition-all duration-300 ${
-                    isInView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-                  }`}
-                  style={{ transitionDelay: `${200 + index * 100}ms` }}
-                >
-                  <button onClick={() => setActiveFeature(feature.id)} className="w-full py-5 text-left">
-                    <h3
-                      className={`text-lg md:text-xl transition-colors duration-300 ${
-                        activeFeature === feature.id
-                          ? "text-primary font-semibold"
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      {feature.title}
-                    </h3>
-                    {activeFeature === feature.id && (
-                      <p className="text-muted-foreground text-sm md:text-base mt-2 leading-relaxed animate-in fade-in slide-in-from-top-2 duration-300">
-                        {feature.description}
-                      </p>
-                    )}
-                  </button>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-32 space-y-4 md:space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/40 text-[10px] md:text-xs font-medium uppercase tracking-widest">
+            <Cpu className="w-3 h-3" />
+            <span>Integrated Architecture</span>
+          </div>
+
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1] px-4">
+            Everything you need <br />
+            <span className="text-white/30">to build with precision.</span>
+          </h2>
+
+          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto px-4">
+            Bridge the gap between vision and production. IdeaForge provides the structural foundation for your next SaaS.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Card 1: Visual Blueprint */}
+          <div className="lg:col-span-2 group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6 md:p-8 hover:bg-white/[0.04] transition-all duration-500">
+            <div className="relative z-10 flex flex-col h-full">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white flex items-center justify-center">
+                  <Workflow className="w-5 h-5 md:w-6 md:h-6 text-black" />
                 </div>
-              ))}
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-white">Visual Blueprint</h3>
+                  <p className="text-xs md:text-sm text-white/40">Architectural flow of your entire app.</p>
+                </div>
+              </div>
+
+              <div className="flex-1 min-h-[250px] md:min-h-[300px] rounded-2xl bg-black/40 border border-white/5 overflow-hidden p-4 md:p-6 relative">
+                <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
+                <div className="relative h-full flex items-center justify-center">
+                  <div className="space-y-8 w-full max-w-xs">
+                    <div className="p-3 rounded-xl bg-white/10 border border-white/10 text-white/80 text-center text-xs">Auth Module</div>
+                    <div className="flex justify-between gap-4">
+                      <div className="flex-1 p-3 rounded-xl bg-white/5 border border-white/5 text-white/40 text-center text-[10px]">Data Store</div>
+                      <div className="flex-1 p-3 rounded-xl bg-white/5 border border-white/5 text-white/40 text-center text-[10px]">API Gateway</div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-white/40 text-center text-[10px]">AI Integration</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right side - Dynamic visual showcase */}
-          <div
-            className={`transition-all duration-700 delay-300 ${
-              isInView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-            }`}
-          >
-            <div className="bg-secondary/50 rounded-3xl p-6 md:p-8 border border-border/40">
-              <div className="min-h-[280px] transition-all duration-500">{renderVisual()}</div>
+          {/* Card 2: AI Tech Stack */}
+          <div className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6 md:p-8 hover:bg-white/[0.04] transition-all duration-500">
+            <div className="relative z-10">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center mb-6">
+                <Layers className="w-5 h-5 md:w-6 md:h-6 text-white" />
+              </div>
+              <h3 className="text-lg md:text-xl font-bold text-white mb-2">Curated Stack</h3>
+              <p className="text-xs md:text-sm text-white/40 mb-8">Optimal tools for your specific idea.</p>
 
-              {/* Bottom toolbar */}
-              <div className="flex items-center justify-center gap-3 mt-6 pt-4 border-t border-border/30">
-                {[Layers, Play, FileCode, Settings, Cpu].map((Icon, i) => (
-                  <button key={i} className="p-2 text-muted-foreground hover:text-foreground transition-colors">
-                    <Icon className="w-4 h-4" />
-                  </button>
+              <div className="space-y-3 md:space-y-4">
+                {['Next.js 15', 'Tailwind CSS', 'Supabase', 'OpenAI'].map((tech) => (
+                  <div key={tech} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                    <span className="text-[11px] md:text-xs text-white/60">{tech}</span>
+                    <Sparkles className="w-3 h-3 text-white/20" />
+                  </div>
                 ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: MVP Roadmap */}
+          <div className="group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6 md:p-8 hover:bg-white/[0.04] transition-all duration-500">
+            <div className="relative z-10">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center mb-6">
+                <Layout className="w-5 h-5 md:w-6 md:h-6 text-white" />
+              </div>
+              <h3 className="text-lg md:text-xl font-bold text-white mb-2">MVP Roadmap</h3>
+              <p className="text-xs md:text-sm text-white/40 mb-8">Strategic path to your first launch.</p>
+
+              <div className="space-y-4 md:space-y-6">
+                <div className="flex gap-4 items-start">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white mt-1.5 shrink-0" />
+                  <div className="space-y-1">
+                    <div className="text-[11px] md:text-xs text-white font-medium">Core Logic Implementation</div>
+                    <div className="text-[9px] md:text-[10px] text-white/30">Build the engine first.</div>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-start">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/20 mt-1.5 shrink-0" />
+                  <div className="space-y-1">
+                    <div className="text-[11px] md:text-xs text-white/40 font-medium">UI Construction</div>
+                    <div className="text-[9px] md:text-[10px] text-white/20">Focus on UX.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4: Vibe Prompt */}
+          <div className="md:col-span-2 group relative overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-6 md:p-8 hover:bg-white/[0.04] transition-all duration-500">
+            <div className="relative z-10 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
+              <div className="flex-1">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white flex items-center justify-center mb-6">
+                  <Zap className="w-5 h-5 md:w-6 md:h-6 text-black" />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-2">Vibe Prompt Export</h3>
+                <p className="text-xs md:text-sm text-white/40">Ready-to-use precision prompts for Cursor, Bolt, or v0.</p>
+              </div>
+              <div className="flex-1 w-full p-4 rounded-xl bg-black/40 border border-white/5 font-mono text-[9px] md:text-[10px] text-white/30 leading-relaxed overflow-hidden">
+                &quot;Act as a senior software engineer... Build a SaaS using Next.js 15 following the integrated map: Auth {"->"} Supabase, Logic {"->"} Edge Functions...&quot;
+                <div className="mt-4 flex justify-end">
+                  <div className="px-3 py-1.5 rounded-lg bg-white text-black font-bold text-[10px]">COPY PROMPT</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

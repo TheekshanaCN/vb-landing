@@ -2,126 +2,100 @@
 
 import { useRef } from "react";
 import { useInView } from "@/hooks/use-in-view";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Cpu } from "lucide-react";
+import Image from "next/image";
 
 export function TransformationSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { threshold: 0.1 });
 
   return (
-    <section ref={sectionRef} className="relative py-32 px-6 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-white" />
+    <section ref={sectionRef} className="relative py-24 md:py-32 px-4 md:px-6 overflow-hidden bg-background">
+      {/* Subtle background glow */}
+      <div className="absolute bottom-0 right-0 w-[600px] md:w-[800px] h-[300px] md:h-[400px] bg-white/[0.02] rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <span
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-6 transition-all duration-700 ${
-              isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-            }`}
-          >
-            <Sparkles className="w-4 h-4" />
-            The Transformation
-          </span>
-          <h2
-            className={`font-serif text-4xl md:text-6xl text-foreground mb-6 transition-all duration-700 delay-200 ${
-              isInView ? "translate-y-0 blur-0" : "translate-y-8 blur-sm"
-            }`}
-          >
-            From chaos to
-            <br />
-            <span className="italic text-muted-foreground">
-              crystal clarity
-            </span>
+      <div className="relative max-w-7xl mx-auto">
+        <div className="text-center mb-16 md:mb-24 space-y-4 md:space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/40 text-[10px] font-bold uppercase tracking-widest mb-4">
+            <Sparkles className="w-3 h-3" />
+            The Evolution
+          </div>
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
+            From chaos to <br />
+            <span className="text-white/30 italic">structural clarity.</span>
           </h2>
         </div>
 
         {/* Transformation visual */}
-        <div className="relative">
-          <div className="grid md:grid-cols-3 gap-8 items-start">
-            {/* Card 1 */}
-            <div
-              className={`transition-all duration-700 delay-300 ${
-                isInView ? "translate-y-0 blur-0" : "translate-y-12 blur-sm"
-              }`}
-            >
-              <div className="relative rounded-2xl overflow-hidden min-h-[300px]">
-                <img
-                  src="/sandboard/fog.png"
-                  alt="Messy"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-foreground text-center">
-                Messy Workspace
-              </h3>
-              <p className="mt-2 text-center text-muted-foreground text-sm">
-                Shows the initial cluttered state before transformation.
-              </p>
-            </div>
+        <div className="grid md:grid-cols-3 gap-12 items-start relative">
+          {/* Connector line background */}
+          <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-white/5 -translate-y-12" />
 
-            {/* Card 2 */}
-            <div
-              className={`transition-all duration-700 delay-500 ${
-                isInView ? "translate-y-0 blur-0" : "translate-y-12 blur-sm"
-              }`}
-            >
-              <div className="relative rounded-2xl overflow-hidden min-h-[300px]">
-                <img
-                  src="/sandboard/ai.png"
-                  alt="Working"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-foreground text-center">
-                In Progress
-              </h3>
-              <p className="mt-2 text-center text-muted-foreground text-sm">
-                Illustrates the active phase of the workflow improvement.
-              </p>
+          {/* Card 1 */}
+          <div className="relative z-10 space-y-6 group">
+            <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
+              <Image
+                src="/sandboard/ideas.webp"
+                alt="Preview"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
+            <div className="text-center space-y-2">
+              <h3 className="text-lg font-bold text-white uppercase tracking-wider">Raw Ideas</h3>
+              <p className="text-sm text-white/40 max-w-[240px] mx-auto">Unstructured thoughts and scattered concepts.</p>
+            </div>
+          </div>
 
-            {/* Card 3 */}
-            <div
-              className={`transition-all duration-700 delay-700 ${
-                isInView ? "translate-y-0 blur-0" : "translate-y-12 blur-sm"
-              }`}
-            >
-              <div className="relative rounded-2xl overflow-hidden min-h-[300px]">
-                <img
-                  src="/sandboard/direction.png"
-                  alt="Clear"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-foreground text-center">
-                Clear & Organized
-              </h3>
-              <p className="mt-2 text-center text-muted-foreground text-sm">
-                Shows the final clean and organized workspace after
-                transformation.
-              </p>
+          {/* Card 2 */}
+          <div className="relative z-10 space-y-6 group">
+            <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
+              <Image
+                src="/sandboard/aib.webp"
+                alt="Preview"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            <div className="text-center space-y-2">
+              <h3 className="text-lg font-bold text-white uppercase tracking-wider">AI Synthesis</h3>
+              <p className="text-sm text-white/40 max-w-[240px] mx-auto">AI analyzes and shapes ideas into a working plan.</p>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className="relative z-10 space-y-6 group">
+            <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
+              <Image
+                src="/sandboard/direction.webp"
+                alt="Preview"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            <div className="text-center space-y-2">
+              <h3 className="text-lg font-bold text-white uppercase tracking-wider">Production Roadmap</h3>
+              <p className="text-sm text-white/40 max-w-[240px] mx-auto">Clear steps and priorities you can act on.</p>
             </div>
           </div>
         </div>
 
         {/* Stats */}
-        <div
-          className={`grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 transition-all duration-700 delay-900 ${
-            isInView ? "translate-y-0 blur-0" : "translate-y-12 blur-sm"
-          }`}
-        >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mt-16 md:mt-32 border-t border-white/5 pt-12 md:pt-16 px-4">
           {[
-            { value: "95%", label: "Faster Planning" },
-            { value: "10x", label: "More Clarity" },
-            { value: "2.4k+", label: "Ideas Transformed" },
-            { value: "48hrs", label: "Avg. Time Saved" },
+            { value: "95%", label: "Faster Architecture" },
+            { value: "10x", label: "Structural Clarity" },
+            { value: "2.5k+", label: "Ideas Solved" },
+            { value: "48hrs", label: "Time Optimized" },
           ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl md:text-4xl font-serif text-accent mb-2">
+            <div key={index} className="text-center space-y-2">
+              <div className="text-3xl md:text-4xl font-bold tracking-tight text-white italic">
                 {stat.value}
               </div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
+              <div className="text-[9px] md:text-[10px] text-white/30 font-bold uppercase tracking-widest">{stat.label}</div>
             </div>
           ))}
         </div>
