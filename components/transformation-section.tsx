@@ -35,7 +35,7 @@ export function TransformationSection() {
           <div className="relative z-10 space-y-6 group">
             <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
               <Image
-                src="/sandboard/ideas.png"
+                src="/sandboard/ideas.webp"
                 alt="Preview"
                 fill
                 className="object-cover"
@@ -52,7 +52,7 @@ export function TransformationSection() {
           <div className="relative z-10 space-y-6 group">
             <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
               <Image
-                src="/sandboard/aib.png"
+                src="/sandboard/aib.webp"
                 alt="Preview"
                 fill
                 className="object-cover"
@@ -69,7 +69,7 @@ export function TransformationSection() {
           <div className="relative z-10 space-y-6 group">
             <div className="aspect-[4/3] rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 relative">
               <Image
-                src="/sandboard/direction.png"
+                src="/sandboard/direction.webp"
                 alt="Preview"
                 fill
                 className="object-cover"

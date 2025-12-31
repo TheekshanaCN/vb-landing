@@ -8,9 +8,11 @@ import {
   Sparkles,
   LayoutGrid,
   Zap,
+  CheckCircle2,
 } from "lucide-react";
 import Image from "next/image";
 import { AnimatedButton } from "./animated-button";
+import { AnimatedText } from "./animated-text";
 
 
 export function HeroSection() {
@@ -20,36 +22,87 @@ export function HeroSection() {
   return (
     <section ref={sectionRef} className="relative pt-24 md:pt-32 pb-12 md:pb-20 px-4 md:px-6 overflow-hidden">
       {/* Enhanced background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[1000px] h-[300px] md:h-[500px] bg-white/[0.08] rounded-full blur-[80px] md:blur-[120px] pointer-events-none animate-pulse" />
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] md:w-[800px] h-[250px] md:h-[400px] bg-gradient-to-b from-white/[0.1] to-transparent rounded-full blur-[60px] md:blur-[80px] pointer-events-none" />
+      {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] md:w-[1000px] h-[300px] md:h-[500px] bg-white/[0.08] rounded-full blur-[80px] md:blur-[120px] pointer-events-none animate-pulse" />
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] md:w-[800px] h-[250px] md:h-[400px] bg-gradient-to-b from-white/[0.1] to-transparent rounded-full blur-[60px] md:blur-[80px] pointer-events-none" /> */}
 
       <div className="relative max-w-7xl mx-auto">
         <div className="text-center mb-12 md:mb-16 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/60 text-[10px] md:text-xs font-medium animate-fade-in">
-            <Sparkles className="w-3 h-3 text-white" />
-            <span>AI-Powered Project Architect</span>
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.03] border border-white/10 text-white/80 text-xs md:text-sm font-medium animate-fade-in backdrop-blur-xl shadow-2xl">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            <span className="flex -space-x-2 items-center">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="w-8 h-8 rounded-full border border-black overflow-hidden">
+                  <Image
+                    src={`/avatars/avatar${i}.webp`} // replace with your images
+                    alt={`User ${i}`}
+                    width={32}
+                    height={32}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              ))}
+
+              {/* +N circle */}
+              <div className="w-8 h-8 rounded-full border border-black bg-neutral-800 flex items-center justify-center text-xs text-white font-medium">
+                +10
+              </div>
+            </span>
+
+
+            <span className="pl-1">Trusted by Founders & Indie Builders</span>
           </div>
 
-          <h1 className="font-sans text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white text-balance max-w-5xl mx-auto leading-[1.1]">
-            Build your SaaS with <br />
-            <span className="text-white/40 italic">Structural Intelligence</span>
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.1] text-foreground text-balance max-w-4xl mx-auto">
+            <AnimatedText
+              text="The AI Workspace for "
+              delay={0}
+              isInView={isInView}
+            />
+            <br className="hidden md:block" />
+            <AnimatedText
+              text="Transforming "
+              delay={200}
+              isInView={isInView}
+            />
+            <span className="italic text-muted-foreground">
+              <AnimatedText text="Ideas " delay={200} isInView={isInView} />
+            </span>
+            <AnimatedText text="into " delay={200} isInView={isInView} />
+            <span className="text-[#db655e]">
+              <AnimatedText text="Reality" delay={400} isInView={isInView} />
+            </span>
           </h1>
 
           <p className="text-base md:text-xl text-white/50 max-w-2xl mx-auto text-balance font-medium px-4">
             Stop building blind. IdeaForge transforms your vision into a complete architectural blueprint: visual maps, tech stacks, and MVP roadmaps.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 px-4">
+
+
+          <div className="flex flex-col items-center justify-center pt-8 px-4">
             <AnimatedButton
-              className="w-full sm:w-auto px-8 py-4 md:py-6 text-base md:text-lg bg-white text-black hover:bg-white/90 font-bold rounded-2xl"
+              className="w-full sm:w-auto px-10 py-4 text-base md:text-lg bg-white text-black font-bold rounded-2xl hover:bg-white/90"
               onClick={() => window.open("https://app-ideaforge.netlify.app/", "_blank")}
             >
-              Start Building Now
+              Create My Blueprint
             </AnimatedButton>
-            <button className="w-full sm:w-auto px-8 py-4 md:py-6 text-base md:text-lg text-white/60 hover:text-white font-medium transition-colors">
-              Watch Demo
-            </button>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 mt-3 text-xs md:text-sm text-white/50">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                No credit card required
+              </span>
+
+              <span className="flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-amber-500" />
+                100 free credits
+              </span>
+            </div>
           </div>
+
         </div>
 
         {/* Dashboard Preview */}
@@ -70,7 +123,7 @@ export function HeroSection() {
               <div className="flex items-center gap-3">
                 <div className="px-2 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] text-white/40 font-mono">GPT-4o</div>
                 <Image
-                  src="/profile/photo.png"
+                  src="/profile/photo.webp"
                   alt="Profile"
                   width={32}
                   height={32}
@@ -167,5 +220,7 @@ export function HeroSection() {
         </div>
       </div>
     </section>
+
+
   );
 }
